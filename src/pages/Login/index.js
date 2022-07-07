@@ -12,7 +12,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     const handleChange = (event) => {
-        if (event.target.name == 'email')
+        if (event.target.name === 'email')
             setEmail(event.target.value)
         else
             setPassword(event.target.value)
