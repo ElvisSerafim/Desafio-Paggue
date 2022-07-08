@@ -1,16 +1,12 @@
 import React from 'react';
 import { Container, Content } from './styles';
 import {
-    FaTimes,
-    FaUserAlt,
-    FaBox
+    FaTimes
 } from 'react-icons/fa';
-import { RiCouponLine } from "react-icons/ri";
-import { BiCategory } from "react-icons/bi";
-import { IoStorefrontSharp } from "react-icons/io5";
 
-
+import { options } from './options';
 import SideBarItem from '../SideBarItem';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar({ active }) {
 
@@ -22,11 +18,15 @@ export default function Sidebar({ active }) {
         <Container sidebar={active}>
             <FaTimes onClick={closeSidebar} />
             <Content>
-                <SideBarItem Icon={FaUserAlt} Text="Perfil" />
-                <SideBarItem Icon={FaBox} Text="Produtos" />
-                <SideBarItem Icon={RiCouponLine} Text="Cupons" />
-                <SideBarItem Icon={BiCategory} Text="Categorias" />
-                <SideBarItem Icon={IoStorefrontSharp} Text="Loja" />
+                {options.map((option, index) => {
+                    return (
+                        <Link to={option.redirectTo} onClick={closeSidebar}>
+                            <SideBarItem Icon={option.icon} Text={option.text} />
+                        </Link>
+                    )
+
+                })}
+
             </Content>
         </Container>
     );
