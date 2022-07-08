@@ -1,0 +1,85 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Hambúrguer",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
+      "price": 8.5,
+      "categoria_id": 1
+    },
+    {
+      "id": "2",
+      "name": "X-Búrguer",
+      "descricao": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, salada e batata.",
+      "preco": 10.5,
+      "categoria_id": 1
+    },
+    {
+      "id": "3",
+      "name": "X-Bacon",
+      "descricao": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, 2 fatia de bacon, salada e batata.",
+      "preco": 12.5,
+      "categoria_id": 1
+    },
+    {
+      "id": "4",
+      "name": "X-Tudo",
+      "descricao": "Pão, 2 bifes de hambúrguer 90g, 2 fatias de queijo, 4 fatias de bacon, salada e batata.",
+      "preco": 14.5,
+      "categoria_id": 1
+    },
+    {
+      "id": "5",
+      "name": "Coca cola 350ml",
+      "descricao": "",
+      "preco": 5.5,
+      "categoria_id": 2
+    },
+    {
+      "id": "6",
+      "name": "Coca cola 600ml",
+      "descricao": "",
+      "preco": 7.5,
+      "categoria_id": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Eletrônicos"
+    },
+    {
+      "id": 2,
+      "name": "Acessórios"
+    }
+  ], 
+  "coupons": [
+      {
+          "id": 1,
+          "CodCoupon": "10OFF",
+          "quantity": "5"
+        },
+        {
+          "id": 2,
+          "codCoupon": "BKFRDAY15",
+          "quantity": "2"
+        },
+        {
+          "id": 3,
+          "codCoupon": "NATALENCANTADO20",
+          "quantity": "3"
+        }
+  ],
+   "users": [
+      {
+          "id": 1,
+          "email": "elvis@gmail.com",
+          "password": "teste",
+          "cpf": "123456789012",
+          "name": "Elvis Serafim",
+          "phone": "75999999999",
+          "razao_social": "Eletrônicas Serafim LTDA",
+          "nome_fantasia": "Serafim Eletrônica"
+      }
+   ]
+}
