@@ -1,15 +1,28 @@
-import React, { } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as C from '../../styles/styles';
 import {
     Button,
     List,
     ListItem,
-    Divider
+    Divider,
 } from '@chakra-ui/react';
 
 import { TiDelete } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
+import { api } from '../../services/api';
 
 export default function Products() {
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        api.get('products').then((response) => {
+            let productsData = response.data;
+            console.log(productsData);
+            setProducts(productsData);
+        })
+    }, [])
+
 
     return (
         <React.Fragment>
@@ -18,19 +31,22 @@ export default function Products() {
                 <C.ContainerRow>
                     <C.ContainerList>
                         <List width={'100%'} spacing={3}>
-                            <ListItem>
-                                <C.ContainerRow>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                                    <TiDelete cursor={'pointer'} size={30} />
-                                </C.ContainerRow>
-                            </ListItem>
-                            <Divider />
-                            <ListItem>
-                                <C.ContainerRow>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                                    <TiDelete cursor={'pointer'} size={30} />
-                                </C.ContainerRow>
-                            </ListItem>
+                            {products.map((product, index) => {
+                                return (
+                                    <>
+                                        <ListItem key={index}>
+                                            <C.ContainerRow>
+                                                <Link to={"/product/"+product.id}>
+                                                    {product.name}
+                                                </Link>
+                                                <TiDelete cursor={'pointer'} size={30} />
+                                            </C.ContainerRow>
+                                        </ListItem>
+                                        <Divider />
+                                    </>
+                                )
+
+                            })}
                         </List>
                     </C.ContainerList>
                 </C.ContainerRow>
@@ -38,6 +54,6 @@ export default function Products() {
                     <Button width={'300px'} height={'50px'} bg="primary">CADASTRAR PRODUTO</Button>
                 </C.ContainerButton>
             </C.ContainerColumn>
-        </React.Fragment>
+        </React.Fragment >
     );
 }

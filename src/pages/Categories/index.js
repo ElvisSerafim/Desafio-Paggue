@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React from 'react';
 import * as C from '../../styles/styles';
 import {
     Button,
@@ -9,8 +9,10 @@ import {
 
 import { TiDelete } from 'react-icons/ti';
 
-export default function Categories() {
 
+
+export default function Categories() {
+   
     return (
         <React.Fragment>
             <C.ContainerColumn userLogged={true}>
