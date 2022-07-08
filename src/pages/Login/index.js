@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { 
     Input, 
     Stack,
-    Link,
     Button } from '@chakra-ui/react';
 import * as C from '../../styles/styles';
 
+import { api } from '../../services/api';
+
+import AuthContext from '../../contexts/auth';
+import { useNavigate, Link } from 'react-router-dom';
+
+
+
 export default function Login() {
 
+    const context = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    let navigate = useNavigate();
 
     const handleChange = (event) => {
         if (event.target.name === 'email')
@@ -17,6 +25,21 @@ export default function Login() {
         else
             setPassword(event.target.value)
     }
+
+    const login = () => {
+        api.get('users').then((response) =>{
+            let users =  response.data;
+            users.map((user, index) => {
+                if(user.email === email && user.password === password){
+                    context.setCurrentUser(user);
+                    navigate('/registerProduct')
+                    return user;
+                }
+                return user; 
+            })
+        }) 
+    }
+
     return (
         <React.Fragment>
             <C.ContainerForm >
@@ -48,9 +71,9 @@ export default function Login() {
                             />
                         </C.DivInput>
                         <C.DivLinkRegister>
-                            <Link color='#1EF098'>Registre-se</Link>
+                            <Link to="/register">Registre-se</Link>
                         </C.DivLinkRegister>
-                        <Button bg="primary">ENTRAR</Button>
+                        <Button onClick={login} bg="primary">ENTRAR</Button>
                     </Stack>
                 </C.ContainerInput>
             </C.ContainerForm>
