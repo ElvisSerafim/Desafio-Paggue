@@ -18,15 +18,19 @@ export default function Products() {
     useEffect(() => {
         api.get('products').then((response) => {
             let productsData = response.data;
-            console.log(productsData);
             setProducts(productsData);
         })
-    }, [])
+    }, []);
+
+    const deleteProduct = (idProduct) => {
+        console.log(idProduct);
+        api.delete('products/' + idProduct);
+    }
 
 
     return (
         <React.Fragment>
-            <C.ContainerColumn userLogged={true}>
+            <C.ContainerColumn>
                 <C.Title>Produtos</C.Title>
                 <C.ContainerRow>
                     <C.ContainerList>
@@ -36,10 +40,10 @@ export default function Products() {
                                     <>
                                         <ListItem key={index}>
                                             <C.ContainerRow>
-                                                <Link to={"/product/"+product.id}>
+                                                <Link to={"/product/" + product.id}>
                                                     {product.name}
                                                 </Link>
-                                                <TiDelete cursor={'pointer'} size={30} />
+                                                <TiDelete onClick={e => deleteProduct(product.id)} id={product.id} cursor={'pointer'} size={30} />
                                             </C.ContainerRow>
                                         </ListItem>
                                         <Divider />
@@ -50,8 +54,10 @@ export default function Products() {
                         </List>
                     </C.ContainerList>
                 </C.ContainerRow>
-                <C.ContainerButton padding={'200px'}>
-                    <Button width={'300px'} height={'50px'} bg="primary">CADASTRAR PRODUTO</Button>
+                <C.ContainerButton padding={'50px'}>
+                    <Link to={'/registerProduct'}>
+                        <Button width={'300px'} height={'50px'} bg="primary">CADASTRAR PRODUTO</Button>
+                    </Link>
                 </C.ContainerButton>
             </C.ContainerColumn>
         </React.Fragment >
