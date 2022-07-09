@@ -1,9 +1,11 @@
 # Desafio Paggue
 
-## Para rodar o json-server que provê as informações.
+## O desafio era desenvolver um sistema para gerenciamento de um Ecommerce, sendo possível realizar o CRUD de produtos, categorias e cupons. Foi utilizada Context API para gereciamento de estado, Chakra UI e styled components para criação dos components e páginas e Json-server para simular a api e realizar requisições.  
+
+### Para rodar o server do json
 
 npm run server 
 
 ### Para rodar o projeto
 
-npm start
+Execute npm start
