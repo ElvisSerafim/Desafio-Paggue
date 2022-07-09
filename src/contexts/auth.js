@@ -8,12 +8,16 @@ export const AuthProvider = ({children}) => {
     
     const setCurrentUser = (user) => {
         setUser(user);
-        sessionStorage.setItem("u", user);
+        sessionStorage.setItem("u", JSON.stringify(user));
+    }
+
+    const getUser = () => {
+        return sessionStorage.getItem("u");
     }
 
 
     return (
-        <AuthContext.Provider value={{signed: Boolean(sessionStorage.getItem("u")), setCurrentUser, user}}>
+        <AuthContext.Provider value={{signed: Boolean(sessionStorage.getItem("u")), getUser, setCurrentUser, user}}>
             {children}
         </AuthContext.Provider>
     )
