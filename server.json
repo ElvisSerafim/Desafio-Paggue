@@ -1,46 +1,28 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Hambúrguer",
-      "description": "Pão, bife de hambúrguer 90g, salada e batata.",
-      "price": 8.5,
-      "categoria_id": 1
+      "name": "Hambúrguer do Elvis",
+      "description": "Pão, bife de hambúrguer 90g, salada e batata, com milkshake de brinde.",
+      "price": "10",
+      "stock": "25",
+      "category_id": 1,
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "X-Búrguer",
-      "descricao": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, salada e batata.",
-      "preco": 10.5,
-      "categoria_id": 1
+      "description": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, salada e batata, além de um molho delicioso.",
+      "price": 10.5,
+      "stock": 20,
+      "category_id": 1,
+      "id": "2"
     },
     {
-      "id": "3",
-      "name": "X-Bacon",
-      "descricao": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, 2 fatia de bacon, salada e batata.",
-      "preco": 12.5,
-      "categoria_id": 1
-    },
-    {
-      "id": "4",
-      "name": "X-Tudo",
-      "descricao": "Pão, 2 bifes de hambúrguer 90g, 2 fatias de queijo, 4 fatias de bacon, salada e batata.",
-      "preco": 14.5,
-      "categoria_id": 1
-    },
-    {
-      "id": "5",
-      "name": "Coca cola 350ml",
-      "descricao": "",
-      "preco": 5.5,
-      "categoria_id": 2
-    },
-    {
-      "id": "6",
-      "name": "Coca cola 600ml",
-      "descricao": "",
-      "preco": 7.5,
-      "categoria_id": 2
+      "name": "Produto Teste",
+      "description": "Jogo Mario Kart",
+      "price": "22",
+      "stock": "10",
+      "category_id": 2,
+      "id": "toe8I4k"
     }
   ],
   "categories": [
@@ -49,37 +31,37 @@
       "name": "Eletrônicos"
     },
     {
-      "id": 2,
-      "name": "Acessórios"
+      "name": "Jogos Digitais",
+      "id": 2
     }
-  ], 
-  "coupons": [
-      {
-          "id": 1,
-          "CodCoupon": "10OFF",
-          "quantity": "5"
-        },
-        {
-          "id": 2,
-          "codCoupon": "BKFRDAY15",
-          "quantity": "2"
-        },
-        {
-          "id": 3,
-          "codCoupon": "NATALENCANTADO20",
-          "quantity": "3"
-        }
   ],
-   "users": [
-      {
-          "id": 1,
-          "email": "elvis@gmail.com",
-          "password": "teste",
-          "cpf": "123456789012",
-          "name": "Elvis Serafim",
-          "phone": "75999999999",
-          "razao_social": "Eletrônicas Serafim LTDA",
-          "nome_fantasia": "Serafim Eletrônica"
-      }
-   ]
+  "coupons": [
+    {
+      "codCoupon": "NATALENCANTADO205",
+      "quantity": "32",
+      "id": "3"
+    }
+  ],
+  "users": [
+    {
+      "email": "elvis@gmail.com",
+      "password": "teste",
+      "cpf_cnpj": "12121231231112",
+      "name": "Elvis Serafim Santos Serafim",
+      "phone": "75999999999",
+      "razao_social": "Eletrônicas Serafim LTDA",
+      "nome_fantasia": "Serafim Eletrônica e Ciaasa",
+      "id": 1
+    },
+    {
+      "email": "antonio@gmail.com",
+      "password": "teste",
+      "cpf_cnpj": "123456789",
+      "name": "Antonio",
+      "phone": "759888888888",
+      "razao_social": "Comercio e Cia",
+      "nome_fantasia": "Comercio do Antonio",
+      "id": 2
+    }
+  ]
 }
