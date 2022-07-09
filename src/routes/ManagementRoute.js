@@ -9,6 +9,9 @@ import Categories from "../pages/Categories";
 import Coupons from "../pages/Coupons";
 import Profile from "../pages/Profile";
 import Product from "../pages/Product";
+import Coupon from "../pages/Coupon";
+import Category from "../pages/Category";
+import Home from "../pages/Home";
 
 
 const ManagementRoute = () => {
@@ -19,12 +22,15 @@ const ManagementRoute = () => {
             <Route path="/registerCoupon" element={<RegisterCoupon />} />
             <Route path="/products" element={<Products />} />
             <Route path="/product/:id" element={<Product />} />
+            <Route path="/coupon/:id" element={<Coupon />} />
+            <Route path="/category/:id" element={<Category />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/coupons" element={<Coupons />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/home" element={<Home />} />
             <Route
                 path="*"
-                element={<Navigate to="/home" replace />}
+                element={<Navigate to="/home" element={<Home />}  replace />}
             />
         </Routes>
     )
