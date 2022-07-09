@@ -20,7 +20,7 @@ export default function Sidebar({ active }) {
             <Content>
                 {options.map((option, index) => {
                     return (
-                        <Link to={option.redirectTo} onClick={closeSidebar}>
+                        <Link key={index} to={option.redirectTo} onClick={closeSidebar}>
                             <SideBarItem Icon={option.icon} Text={option.text} />
                         </Link>
                     )

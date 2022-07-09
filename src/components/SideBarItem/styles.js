@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   font-size: 20px;
-  color: black;
+  color: white;
   padding: 10px;
   cursor: pointer;
   border-radius: 10px;
@@ -13,7 +13,7 @@ export const Container = styled.div`
     margin: 0 20px;
   }
   &:hover {
-    background-color: black;
+    background-color: #1EF098;
     color: white;
   }
 `;

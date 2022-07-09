@@ -11,7 +11,7 @@ export const options = [
         id: 1,
         text: "Home",
         icon: FaHome,
-        redirectTo: "/products"
+        redirectTo: "/home"
     },
     {
         id: 2,
