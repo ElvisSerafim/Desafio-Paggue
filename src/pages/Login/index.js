@@ -32,7 +32,7 @@ export default function Login() {
             users.map((user, index) => {
                 if(user.email === email && user.password === password){
                     context.setCurrentUser(user);
-                    navigate('/registerProduct')
+                    navigate('/home');
                     return user;
                 }
                 return user; 
