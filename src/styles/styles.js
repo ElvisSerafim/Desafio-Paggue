@@ -32,7 +32,7 @@ export const ContainerInput = styled.div`
 `;
 
 export const ContainerColumn = styled.div`
-    padding: ${props => props.userLogged ? "50px" : 0};
+    padding: 50px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -80,6 +80,12 @@ export const Title = styled.p`
     font-size: 40px;
     padding-bottom: 35px;
     padding-top: 10px;
+`;
+
+export const Subtitle = styled.p`
+    font-weight: 400;
+    color: black;
+    font-size: 25px;
 `;
 
 export const ContainerRegisterFields = styled.div`
