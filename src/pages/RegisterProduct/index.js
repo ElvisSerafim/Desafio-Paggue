@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Input,
     Stack,
@@ -11,12 +11,61 @@ import {
     Button
 } from '@chakra-ui/react';
 import * as C from '../../styles/styles';
+import { api } from '../../services/api';
 
 export default function RegisterProduct() {
 
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(0);
+    const [stock, setStock] = useState(0);
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
+
+
+    useEffect(() => {
+        const getCategories = () => {
+            api.get('categories').then((response => {
+                let categories = response.data;
+                setCategories(categories);
+            }));
+        }
+
+        getCategories();
+    }, []);
+
+    function findCategoryId() {
+        let category_id;
+        categories.map((categ) => {
+            if (categ.name === category) {
+                category_id = categ.id;
+            }
+            return categ.id;
+        });
+
+        return category_id;
+    }
+
+    const createProduct = () => {
+
+        let category_id = findCategoryId();
+
+        const product = {
+            name: name,
+            description: description,
+            price: price,
+            stock: stock,
+            category_id: category_id,
+            id: Math.floor(Math.random * 100000000)
+        }
+
+        api.post('products/', product);
+    }
+
     return (
         <React.Fragment>
-            <C.ContainerColumn userLogged={true}>
+            <C.ContainerColumn>
+                <C.Title>Registrar Produto</C.Title>
                 <C.ContainerRow>
                     <C.ContainerRegisterFields>
                         <Stack spacing={5}>
@@ -25,22 +74,26 @@ export default function RegisterProduct() {
                                 <Input
                                     width={400}
                                     height={50}
-
+                                    onChange={e => setName(e.target.value)}
+                                    value={name}
                                 />
                             </C.DivInput>
 
                             <C.DivInput>
                                 <FormControl>
                                     <FormLabel htmlFor='category'>Categoria</FormLabel>
-                                    <Select id='category' placeholder='Selecione uma categoria'>
-                                        <option>United Arab Emirates</option>
-                                        <option>Nigeria</option>
+                                    <Select value={category} onChange={e => setCategory(e.target.value)} id='category' placeholder='Selecione uma categoria'>
+                                        {categories.map((categ, index) => {
+                                            return (
+                                                <option > {categ.name} </option>
+                                            )
+                                        })}
                                     </Select>
                                 </FormControl>
                             </C.DivInput>
                             <C.DivInput>
                                 <C.TextInput>Descrição</C.TextInput>
-                                <Textarea />
+                                <Textarea value={description} onChange={e => setDescription(e.target.value)} />
                             </C.DivInput>
                         </Stack>
 
@@ -56,7 +109,7 @@ export default function RegisterProduct() {
                                         fontSize='1.2em'
                                         children='$'
                                     />
-                                    <Input type={'number'} />
+                                    <Input value={price} onChange={e => setPrice(e.target.value)} type={'number'} />
                                 </InputGroup>
                             </C.DivInput>
 
@@ -65,8 +118,9 @@ export default function RegisterProduct() {
                                 <Input
                                     width={400}
                                     height={50}
-                                    name='password'
                                     type={'number'}
+                                    onChange={e => setStock(e.target.value)}
+                                    value={stock}
                                 />
                             </C.DivInput>
 
@@ -74,7 +128,7 @@ export default function RegisterProduct() {
                     </C.ContainerRegisterFields>
                 </C.ContainerRow>
                 <C.ContainerButtonRegister padding={'20px'}>
-                    <Button width={'300px'} height={'50px'} bg="primary">CADASTRAR</Button>
+                    <Button onClick={createProduct} width={'300px'} height={'50px'} bg="primary">CADASTRAR</Button>
                 </C.ContainerButtonRegister>
             </C.ContainerColumn>
         </React.Fragment>
