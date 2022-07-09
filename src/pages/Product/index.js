@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Input,
     Stack,
@@ -20,22 +20,79 @@ export default function Product() {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState(0);
+    const [stock, setStock] = useState(0);
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        api.get('products').then((response) => {
-            let productsData = response.data;
-            console.log(id)
-            productsData.map((prod, index) => {
-                if(id === prod.id)
-                    setProduct(prod)
-            })
-            return null;
-        })
-    }, [id])
+        const getProducts = () => {
+            api.get('products').then((response) => {
+                let productsData = response.data;
+                productsData.map((prod, index) => {
+                    if (id === prod.id) {
+                        setProduct(prod);
+                        setName(prod.name);
+                        setDescription(prod.description);
+                        setPrice(prod.price);
+                        setStock(prod.stock);
+                    }
+                })
+                return;
+            });
+
+        }
+        const getCategories = () => {
+            api.get('categories').then((response => {
+                let categories = response.data;
+                setCategories(categories);
+                categories.map((categ) => {
+                    console.log(categ.id);
+                    console.log(product);
+                    if (categ.id === product.category_id) {
+                        setCategory(categ.name);
+                    }
+                })
+            }));
+        }
+
+        getProducts();
+        getCategories();
+    }, [id, product.category_id]);
+
+    function findCategoryId() {
+        let category_id;
+        categories.map((categ) => {
+            if (categ.name === category) {
+                category_id = categ.id;
+            }
+            return categ.id;
+        });
+
+        return category_id;
+    }
+
+    const updateProduct = () => {
+
+        let category_id = findCategoryId();
+
+        const productUpdated = {
+            name: name,
+            description: description,
+            price: price,
+            stock: stock,
+            category_id: category_id,
+        }
+
+        api.put('products/' + id, productUpdated);
+    }
 
     return (
         <React.Fragment>
-            <C.ContainerColumn userLogged={true}>
+            <C.ContainerColumn>
+                <C.Title>Produto</C.Title>
                 <C.ContainerRow>
                     <C.ContainerRegisterFields>
                         <Stack spacing={5}>
@@ -44,22 +101,29 @@ export default function Product() {
                                 <Input
                                     width={400}
                                     height={50}
-                                    value={product.name}
+                                    value={name}
+                                    onChange={e => setName(e.target.value)}
                                 />
                             </C.DivInput>
 
                             <C.DivInput>
                                 <FormControl>
                                     <FormLabel htmlFor='category'>Categoria</FormLabel>
-                                    <Select id='category' placeholder='Selecione uma categoria'>
-                                        <option>United Arab Emirates</option>
-                                        <option>Nigeria</option>
+                                    <Select value={category} onChange={e => setCategory(e.target.value)} id='category' placeholder='Selecione uma categoria'>
+                                        {categories.map((categ, index) => {
+                                            return (
+                                                <option > {categ.name} </option>
+                                            )
+                                        })}
                                     </Select>
                                 </FormControl>
                             </C.DivInput>
                             <C.DivInput>
                                 <C.TextInput>Descrição</C.TextInput>
-                                <Textarea />
+                                <Textarea
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                />
                             </C.DivInput>
                         </Stack>
 
@@ -75,7 +139,7 @@ export default function Product() {
                                         fontSize='1.2em'
                                         children='$'
                                     />
-                                    <Input type={'number'} />
+                                    <Input value={price} onChange={e => setPrice(e.target.value)} type={'number'} />
                                 </InputGroup>
                             </C.DivInput>
 
@@ -86,6 +150,8 @@ export default function Product() {
                                     height={50}
                                     name='password'
                                     type={'number'}
+                                    value={stock}
+                                    onChange={e => setStock(e.target.value)}
                                 />
                             </C.DivInput>
 
@@ -93,7 +159,7 @@ export default function Product() {
                     </C.ContainerRegisterFields>
                 </C.ContainerRow>
                 <C.ContainerButtonRegister padding={'20px'}>
-                    <Button width={'300px'} height={'50px'} bg="primary">CADASTRAR</Button>
+                    <Button onClick={updateProduct} width={'300px'} height={'50px'} bg="primary">SALVAR</Button>
                 </C.ContainerButtonRegister>
             </C.ContainerColumn>
         </React.Fragment>
