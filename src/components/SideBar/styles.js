@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: black;
-  position: fixed;
+  background-color: ${props => props.backgroundColor ? props.backgroundColor : "black"};
+  position: absolute;
   height: 100%;
   top: 0px;
   left: 0px;

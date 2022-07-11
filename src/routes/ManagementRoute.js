@@ -12,6 +12,7 @@ import Product from "../pages/Product";
 import Coupon from "../pages/Coupon";
 import Category from "../pages/Category";
 import Home from "../pages/Home";
+import Store from "../pages/Store";
 
 
 const ManagementRoute = () => {
@@ -27,6 +28,7 @@ const ManagementRoute = () => {
             <Route path="/categories" element={<Categories />} />
             <Route path="/coupons" element={<Coupons />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/store" element={<Store />} />
             <Route path="/home" element={<Home />} />
             <Route
                 path="*"

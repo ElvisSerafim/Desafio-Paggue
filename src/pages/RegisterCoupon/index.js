@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     Input,
     Stack,
@@ -6,18 +6,26 @@ import {
 } from '@chakra-ui/react';
 import * as C from '../../styles/styles';
 import { api } from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 export default function RegisterCoupon() {
 
     const [codCoupon, setCodCoupon] = useState('');
     const [quantity, setQuantity] = useState(0);
+    const context = useContext(AuthContext);
+    const currentUser = JSON.parse(context.getUser());
 
     const createCoupon = () => {
+
+        setCodCoupon('');
+        setQuantity(0);
 
         const coupon = {
             codCoupon: codCoupon,
             quantity: quantity,
-            id: Math.floor(Math.random * 100000000)
+            id: Math.floor(Math.random * 100000000),
+            user_id: currentUser.id.toString()
+
         }
 
         api.post('coupons/', coupon);
@@ -33,7 +41,6 @@ export default function RegisterCoupon() {
                             <C.DivInput>
                                 <C.TextInput>Código do Cupom</C.TextInput>
                                 <Input
-                                    width={400}
                                     height={50}
                                     onChange={e => setCodCoupon(e.target.value)}
                                 />
@@ -46,7 +53,6 @@ export default function RegisterCoupon() {
                             <C.DivInput>
                                 <C.TextInput>Quantidade</C.TextInput>
                                 <Input
-                                    width={400}
                                     height={50}
                                     type={'number'}
                                     onChange={e => setQuantity(e.target.value)}

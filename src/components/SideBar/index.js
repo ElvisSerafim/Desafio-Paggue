@@ -7,15 +7,17 @@ import {
 import { options } from './options';
 import SideBarItem from '../SideBarItem';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../../contexts/auth';
 
 export default function Sidebar({ active }) {
-
+    const context = useContext(AuthContext);
     const closeSidebar = () => {
         active(false)
     }
 
     return (
-        <Container sidebar={active}>
+        <Container sidebar={active} backgroundColor={context.colorBackground}>
             <FaTimes onClick={closeSidebar} />
             <Content>
                 {options.map((option, index) => {

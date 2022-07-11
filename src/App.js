@@ -10,13 +10,11 @@ import { AuthProvider } from "./contexts/auth";
 import AppRoutes from "./routes/index";
 
 export default function App() {
-
     return (
         <ChakraProvider theme={newTheme}>
-
             <BrowserRouter>
                 <AuthProvider>
-                    <C.Container>
+                    <C.Container >
                         <Header />
                         <AppRoutes />
                     </C.Container>

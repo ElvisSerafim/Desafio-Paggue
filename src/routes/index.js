@@ -6,7 +6,6 @@ import ManagementRoute from './ManagementRoute';
 
 const AppRoutes = () => {
  const { signed } = useContext(AuthContext);
- console.log(signed);
  return signed ? <ManagementRoute /> : <SignRoute />;
 };
 

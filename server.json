@@ -1,11 +1,12 @@
 {
   "products": [
     {
-      "name": "Hambúrguer do Elvis",
+      "name": "Hambúrguer do Elvis E Gabriel",
       "description": "Pão, bife de hambúrguer 90g, salada e batata, com milkshake de brinde.",
       "price": "10",
       "stock": "25",
-      "category_id": 1,
+      "category_id": "1",
+      "user_id": "2",
       "id": "1"
     },
     {
@@ -13,33 +14,88 @@
       "description": "Pão, bife de hambúrguer 90g, 1 fatia de queijo, salada e batata, além de um molho delicioso.",
       "price": 10.5,
       "stock": 20,
-      "category_id": 1,
-      "id": "2"
+      "category_id": "1",
+      "id": "2",
+      "user_id": "2"
     },
     {
-      "name": "Produto Teste",
+      "name": "Produto Teste e Vai",
       "description": "Jogo Mario Kart",
       "price": "22",
       "stock": "10",
-      "category_id": 2,
+      "category_id": "2",
+      "user_id": "2",
       "id": "toe8I4k"
+    },
+    {
+      "name": "Feijao",
+      "description": "Alimento Saudavel",
+      "price": "23",
+      "stock": "19",
+      "category_id": "NaN",
+      "id": "X5YJmw5",
+      "user_id": "1"
     }
   ],
   "categories": [
     {
-      "id": 1,
-      "name": "Eletrônicos"
+      "name": "Eletrônicos e CIA e Amor",
+      "user_id": "2",
+      "id": "1"
     },
     {
       "name": "Jogos Digitais",
-      "id": 2
+      "id": "2",
+      "user_id": "2"
+    },
+    {
+      "name": "Categoria Teste",
+      "id": "3",
+      "user_id": "2"
     }
   ],
   "coupons": [
     {
-      "codCoupon": "NATALENCANTADO205",
-      "quantity": "32",
+      "codCoupon": "TESTANDO1",
+      "quantity": "121",
+      "id": "1",
+      "user_id": "2"
+    },
+    {
+      "codCoupon": "TESTE",
+      "quantity": "12",
+      "id": "2",
+      "user_id": "2"
+    },
+    {
+      "codCoupon": "NOVOEANTIGO",
+      "quantity": "25",
+      "user_id": "2",
       "id": "3"
+    },
+    {
+      "codCoupon": "CUPOM10",
+      "quantity": "10",
+      "id": "4",
+      "user_id": "1"
+    },
+    {
+      "codCoupon": "cupom20",
+      "quantity": "12",
+      "id": "5",
+      "user_id": "1"
+    },
+    {
+      "codCoupon": "cupom30",
+      "quantity": "121",
+      "id": "-9R6blv",
+      "user_id": "1"
+    },
+    {
+      "codCoupon": "Testando",
+      "quantity": "12",
+      "id": "4AAZlbE",
+      "user_id": "1"
     }
   ],
   "users": [
@@ -62,6 +118,33 @@
       "razao_social": "Comercio e Cia",
       "nome_fantasia": "Comercio do Antonio",
       "id": 2
+    }
+  ],
+  "store": [
+    {
+      "minimum_amount": "12",
+      "discount": "21",
+      "background": "red",
+      "user_id": "1",
+      "id": 1
+    },
+    {
+      "minimum_amount": "20",
+      "discount": "10",
+      "background": "black",
+      "user_id": "2",
+      "id": 2
+    }
+  ],
+  "colors": [
+    {
+      "color": "red"
+    },
+    {
+      "color": "blue"
+    },
+    {
+      "color": "black"
     }
   ]
 }
