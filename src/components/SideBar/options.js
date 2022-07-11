@@ -35,7 +35,7 @@ export const options = [
         id: 5,
         text: "Loja",
         icon: IoStorefrontSharp,
-        redirectTo: "/categories"
+        redirectTo: "/store"
     },
     
 ]

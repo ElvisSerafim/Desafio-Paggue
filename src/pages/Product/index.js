@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
     Input,
     Stack,
@@ -14,6 +14,7 @@ import * as C from '../../styles/styles';
 
 import { useParams } from 'react-router';
 import { api } from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 
 export default function Product() {
@@ -26,6 +27,9 @@ export default function Product() {
     const [stock, setStock] = useState(0);
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
+
+    const context = useContext(AuthContext);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
         const getProducts = () => {
@@ -84,6 +88,7 @@ export default function Product() {
             price: price,
             stock: stock,
             category_id: category_id,
+            user_id:currentUser.id.toString()
         }
 
         api.put('products/' + id, productUpdated);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import * as C from '../../styles/styles';
 import {
     Button,
@@ -10,16 +10,31 @@ import {
 import { TiDelete } from 'react-icons/ti';
 import { api } from '../../services/api';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/auth';
 
 export default function Categories() {
 
+    const context = useContext(AuthContext);
     const [categories, setCategories] = useState([]);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
-        api.get('categories').then((response) => {
-            let categoriesData = response.data;
-            setCategories(categoriesData);
-        })
+        const getCategories = () => {
+
+            api.get('categories').then((response) => {
+                let categoriesData = response.data;
+                let categoriesAux = [];
+                categoriesData.map((categ) => {
+                    if (categ.user_id === currentUser.id.toString()) {
+                        let categAux = categ;
+                        categoriesAux.push(categAux);
+                    }
+                })
+                setCategories(categoriesAux);
+            });
+        }
+
+        getCategories();
     }, [categories]);
 
     const deleteCategory = (idCategory) => {

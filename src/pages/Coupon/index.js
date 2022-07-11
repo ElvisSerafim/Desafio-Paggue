@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
     Input,
     Stack,
@@ -8,6 +8,7 @@ import * as C from '../../styles/styles';
 
 import { useParams } from 'react-router';
 import { api } from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 
 export default function Coupon() {
@@ -15,6 +16,9 @@ export default function Coupon() {
     const { id } = useParams();
     const [codCoupon, setCodCoupon] = useState('');
     const [quantity, setQuantity] = useState(0);
+
+    const context = useContext(AuthContext);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
         const getCoupons = () => {
@@ -40,6 +44,7 @@ export default function Coupon() {
         const couponUpdated = {
             codCoupon: codCoupon,
             quantity: quantity,
+            user_id:currentUser.id.toString()
         }
 
         api.put('coupons/' + id, couponUpdated);

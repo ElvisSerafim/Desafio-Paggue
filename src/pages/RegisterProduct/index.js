@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     Input,
     Stack,
@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import * as C from '../../styles/styles';
 import { api } from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 export default function RegisterProduct() {
 
@@ -21,13 +22,21 @@ export default function RegisterProduct() {
     const [stock, setStock] = useState(0);
     const [category, setCategory] = useState('');
     const [categories, setCategories] = useState([]);
-
+    const context = useContext(AuthContext);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
         const getCategories = () => {
             api.get('categories').then((response => {
-                let categories = response.data;
-                setCategories(categories);
+                let categoriesData = response.data;
+                let categoriesAux = [];
+                categoriesData.map((categ) => {
+                    if (categ.user_id === currentUser.id.toString()) {
+                        let categAux = categ;
+                        categoriesAux.push(categAux);
+                    }
+                })
+                setCategories(categoriesAux);
             }));
         }
 
@@ -56,7 +65,9 @@ export default function RegisterProduct() {
             price: price,
             stock: stock,
             category_id: category_id,
-            id: Math.floor(Math.random * 100000000)
+            id: Math.floor(Math.random * 100000000),
+            user_id:currentUser.id.toString()
+
         }
 
         api.post('products/', product);
@@ -72,7 +83,6 @@ export default function RegisterProduct() {
                             <C.DivInput>
                                 <C.TextInput>Nome</C.TextInput>
                                 <Input
-                                    width={400}
                                     height={50}
                                     onChange={e => setName(e.target.value)}
                                     value={name}
@@ -116,7 +126,7 @@ export default function RegisterProduct() {
                             <C.DivInput>
                                 <C.TextInput>Estoque</C.TextInput>
                                 <Input
-                                    width={400}
+                                    
                                     height={50}
                                     type={'number'}
                                     onChange={e => setStock(e.target.value)}

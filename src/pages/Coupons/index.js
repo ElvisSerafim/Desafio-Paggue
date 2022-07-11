@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import * as C from '../../styles/styles';
 import {
     Button,
@@ -10,16 +10,25 @@ import {
 import { TiDelete } from 'react-icons/ti';
 import { api } from '../../services/api';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../contexts/auth';
 
 export default function Coupons() {
-
+    const context = useContext(AuthContext);
     const [coupons, setCoupons] = useState([]);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
         api.get('coupons').then((response) => {
             let couponsData = response.data;
-            setCoupons(couponsData);
-        })
+            let couponsAux = [];
+            couponsData.map((coup) => {
+                if(coup.user_id === currentUser.id.toString()){
+                    let couponAux = coup;
+                    couponsAux.push(couponAux);
+                }
+            })
+            setCoupons(couponsAux);
+        });
     }, [coupons]);
 
     const deleteCoupon = (idCoupon) => {

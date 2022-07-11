@@ -35,11 +35,19 @@ export default function Register() {
             phone: phone,
             razao_social: razaoSocial,
             nome_fantasia: nomeFantasia,
-            id: Math.floor(Math.random * 100000000)
+            id:Date.now(),
+        }
+
+        const store = {
+            minimum_amount: "",
+            discount: "",
+            user_id:Date.now(),
+
         }
         api.post('users/', user);
+        api.post('store', store);
         context.setCurrentUser(user);
-        navigate('/profile');
+        navigate('/home');
     }
 
 

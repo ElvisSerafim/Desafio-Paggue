@@ -12,12 +12,12 @@ import AuthContext from '../../contexts/auth';
 export default function Header(props) {
     const { signed } = useContext(AuthContext);
     const [showSideBar, setShowSideBar] = useState(false);
-
+    const context = useContext(AuthContext);
     const openSideBar = () => setShowSideBar(!showSideBar);
 
     return (
         <React.Fragment>
-            <C.ContainerHeader>
+            <C.ContainerHeader backgroundColor={context.colorBackground} >
                 {signed === true ? (
                     <FaBars size={25} cursor={'pointer'} onClick={openSideBar} />
                 ) : <></>}

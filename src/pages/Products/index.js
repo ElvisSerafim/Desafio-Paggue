@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import * as C from '../../styles/styles';
 import {
     Button,
@@ -10,17 +10,29 @@ import {
 import { TiDelete } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
+import AuthContext from '../../contexts/auth';
 
 export default function Products() {
-
+    
+    const context = useContext(AuthContext);
     const [products, setProducts] = useState([]);
+    const currentUser = JSON.parse(context.getUser());
 
     useEffect(() => {
+
         api.get('products').then((response) => {
             let productsData = response.data;
-            setProducts(productsData);
+            let productsAux = [];
+            productsData.map((prod) => {
+                console.log(prod);
+                if(prod.user_id === currentUser.id.toString()){
+                    let prodAux = prod;
+                    productsAux.push(prodAux);
+                }
+            })
+            setProducts(productsAux);
         })
-    }, []);
+    }, [currentUser.id, products]);
 
     const deleteProduct = (idProduct) => {
         console.log(idProduct);

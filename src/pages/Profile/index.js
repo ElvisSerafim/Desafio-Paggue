@@ -24,7 +24,6 @@ export default function Profile() {
     useEffect(() => {
 
         const currentUser = JSON.parse(context.getUser());
-        console.log(currentUser);
         setUser(currentUser);
         setEmail(currentUser.email);
         setPassword(currentUser.password);
@@ -48,7 +47,6 @@ export default function Profile() {
             razao_social:razaoSocial,
             nome_fantasia: nomeFantasia
         }
-        console.log(user.id);
         api.put('users/' + user.id, userUpdated);
         context.setCurrentUser(userUpdated);
     } 
