@@ -5,4 +5,4 @@
 
 ### Para rodar o projeto:
 
-Execute npm start
+npm start
